@@ -22,17 +22,13 @@ sudo $install_optional
 echo "Cloning/updating Allegro 5 repository..."
 if cd allegro5; then 
 	git pull
-	cd ..
 else 
 	git clone $repository_url
+	cd allegro5 || exit 1
 fi
 
-# cd into cloned repository.
-# If we were unable to clone the repository, exit the script.
-cd allegro5 || exit 1
-
 # Create and cd into the build directory.
-mkdir build
+mkdir -p build
 cd build
 
 # Compile and install Allegro.
@@ -41,7 +37,8 @@ cmake ..
 echo "Installing library files (requires sudo)."
 sudo make -j2 install
 
-# Return the user back to the directory they started with.
-cd ..
+# Delete the repository since we don't need it anymore.
+echo "Cleaning up repository..."
+sudo rm -rf ../../allegro5
 
 echo "Process complete!"
