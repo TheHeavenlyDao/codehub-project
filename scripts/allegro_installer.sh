@@ -24,7 +24,7 @@ if cd allegro5; then
 	git pull
 	cd ..
 else 
-	git clone repository_url
+	git clone $repository_url
 fi
 
 # cd into cloned repository.
