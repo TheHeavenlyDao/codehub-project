@@ -1,0 +1,5 @@
+# Ignore build, bin, and include folders
+
+/bin/
+/build/
+/install/
