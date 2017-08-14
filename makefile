@@ -1,5 +1,5 @@
 ##################################################################################################################
-# # Author(s):	Squidy (https://github.com/gsemac)
+# Author(s):	Squidy (https://github.com/gsemac)
 # Description:	Makefile for codehub-project. Comments included for educational purposes.
 ##################################################################################################################
 
@@ -8,7 +8,7 @@ CC = g++
 # The flags we're going to pass to the compiler.
 CFLAGS = -std=c++11 -Wall
 # Our linker flags.
-LNFLAGS = -Wl,-rpath=$(LIBDIR) -L $(LIBDIR) -lallegro
+LNFLAGS = -Wl,-rpath=$(LIBDIR) -L $(LIBDIR) -lallegro -lallegro_image
 # The include paths we want to pass to the compiler. Use the -I flag for each path.
 INCLUDE = -I /usr/local/include/ -I $(INCDIR)
 
@@ -41,8 +41,8 @@ $(EXECUTABLE): build-dirs $(OBJECTS)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $(BINDIR)/$@ $(OBJECTS) $(LNFLAGS)
 
 # This target is a generic target for creating object files from source files.
-$(OBJDIR)/%.o : $(SRCDIR)/%.cc
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 # This target cleans up our object files and binaries.
 clean:
